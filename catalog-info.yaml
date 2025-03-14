@@ -1,0 +1,25 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: Login-v0
+  description: Авторизация пользователя
+  annotations:
+    github.com/project-slug: s21platform/auth-proto  # Укажите правильный репозиторий
+  #    backstage.io/techdocs-ref: dir:.  # Если планируете использовать TechDocs
+  tags:
+    - proto
+spec:
+  type: grpc
+  lifecycle: production
+  owner: auth-service-team  # GitHub-логин ответственного
+  definition: |
+    rpc Login (LoginRequest) returns (LoginResponse) {};
+    
+    message LoginRequest {
+        string username = 1;
+        string password = 2;
+    }
+  
+    message LoginResponse {
+      string jwt = 1;
+    }
